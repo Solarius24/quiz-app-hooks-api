@@ -1,8 +1,8 @@
 import React from "react";
 
-const ScoreCard = ({ display, value }) => {
+const ScoreCard = ({ value, questionIndex }) => {
   return (
-    <div className="scoreCard" style={display}>
+    <div className="scoreCard" style={{display:(questionIndex < 9) ? 'none' : 'block'}}>
       <h1>YOUR SCORE</h1>
       <h1>{value} %</h1>
       <button

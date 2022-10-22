@@ -1,18 +1,34 @@
 import React from "react";
+import {Link} from "react-router-dom"
+import "./Quiz.css"
 
 const ScoreCard = ({ value, questionIndex }) => {
   return (
-    <div className="scoreCard" style={{display:(questionIndex < 9) ? 'none' : 'block'}}>
-      <h1>YOUR SCORE</h1>
-      <h1>{value} %</h1>
+    <>
+       <nav>
+          <ul>
+            <li className="homeBtn">
+              <Link to="/" className="homeBtn">
+                Home
+              </Link>
+            </li>
+          </ul>
+        </nav>
+    {/* <div className="scoreCard" style={{display:(questionIndex < 9) ? 'none' : 'block'}}> */}
+    <div className="quiz-container">
+      <h2>YOUR SCORE</h2>
+      <h2>{value} %</h2>
+      <Link to="/quiz">
       <button
-        onClick={() => {
-          window.location.reload(false);
-        }}
+        // onClick={() => {
+        //   window.location.reload(false);
+        // }}
       >
         START NEW QUIZ
       </button>
-    </div>
+      </Link>
+      </div>
+    </>
   );
 };
 

@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from "react";
-import ScoreCard from "./ScoreCard";
 import axios from "axios";
 import { NewQuestion } from "./NewQuestion";
 import "./Quiz.css";
 import { Loader } from "./Loader";
 import { Link, useNavigate } from "react-router-dom";
-import App from "../App"
 
-const Quiz = ({setScoreValue}) => {
+const Quiz = ({ setScoreValue, category, difficulty,name }) => {
   const [dataApi, setDataApi] = useState(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [value, setValue] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
+    const linker = () => {
+      if (category === "any" && difficulty === "any") {
+        return `https://opentdb.com/api.php?amount=10`;
+      } else if (category === "any" && difficulty !== "any") {
+        return `https://opentdb.com/api.php?amount=10&difficulty=${difficulty}&type=multiple`;
+      } else if (category !== "any" && difficulty === "any") {
+        return `https://opentdb.com/api.php?amount=10&category=${category}&type=multiple`;
+      } else {
+        return `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`;
+      }
+    };
+
     const dataFetch = async () => {
-      const data = await axios.get(
-        "https://opentdb.com/api.php?amount=10&type=multiple"
-      );
+      const data = await axios.get(`${linker()}`);
       const dataApiNew = data.data.results;
       setDataApi(dataApiNew);
     };
@@ -29,7 +38,7 @@ const Quiz = ({setScoreValue}) => {
       setQuestionIndex(questionIndex + 1);
       if (userAnswer === dataApi[questionIndex].correct_answer) {
         setValue(value + 10);
-        setScoreValue(value)
+        setScoreValue(value);
       }
     }
     if (questionIndex >= 9) {
@@ -51,17 +60,14 @@ const Quiz = ({setScoreValue}) => {
             </li>
           </ul>
         </nav>
-        {/* <ScoreCard questionIndex={questionIndex} value={value} /> */}
-        <div
-          className="quiz-container"
-          // style={{ display: questionIndex >= 9 ? "none" : "block" }}
-        >
+        <div className="player_name">PLAYER NAME: {name}</div>
+        <div className="quiz-container">
           <h2>{questionIndex + 1}/10</h2>
           <NewQuestion
             dataApi={dataApi[questionIndex]}
             setUserAnswer={setUserAnswer}
           />
-          <button  onClick={click}>Submit</button>
+          <button onClick={click}>Submit</button>
         </div>
       </>
     );

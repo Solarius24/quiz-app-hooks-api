@@ -5,7 +5,7 @@ import "./Quiz.css";
 import { Loader } from "./Loader";
 import { Link, useNavigate } from "react-router-dom";
 
-const Quiz = ({ setScoreValue, category, difficulty,name }) => {
+const Quiz = ({ setScoreValue, category, difficulty,name}) => {
   const [dataApi, setDataApi] = useState(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [value, setValue] = useState(0);
@@ -30,18 +30,22 @@ const Quiz = ({ setScoreValue, category, difficulty,name }) => {
       const dataApiNew = data.data.results;
       setDataApi(dataApiNew);
     };
-    const myTimeout = setTimeout(dataFetch, 2000);
+    const myTimeout =() => setTimeout(dataFetch, 5000);
+    myTimeout()
   }, []);
 
   const click = () => {
+
     if (questionIndex < 9) {
       setQuestionIndex(questionIndex + 1);
       if (userAnswer === dataApi[questionIndex].correct_answer) {
         setValue(value + 10);
         setScoreValue(value);
+
       }
     }
     if (questionIndex >= 9) {
+     
       return navigate("/quiz/score");
     }
   };

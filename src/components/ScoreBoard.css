@@ -1,0 +1,48 @@
+.board_container {
+  background-image: url("../images/quiz\ background.jpg");
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.header_container {
+  margin-top: 20vh;
+  display: grid;
+  grid-template-columns: repeat(5, 12vw);
+  border: 5px red solid;
+  border-radius: 10px;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-bottom: 1vh;
+  background-color: lightyellow;
+}
+
+.header_container th {
+  border: 2px black solid;
+}
+
+.score_container {
+  background-color: yellowgreen;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(5, 12vw);
+  border: 2px green solid;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.score_container td {
+  border: 2px black solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.scoreBtn {
+  position: relative;
+  bottom: 70vh;
+  left:85vw
+}

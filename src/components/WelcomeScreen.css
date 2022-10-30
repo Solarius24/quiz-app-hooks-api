@@ -61,4 +61,30 @@
   flex-direction: column;
   gap:5px;
   font-size:15px;
+  
+}
+
+.scorelist {
+  position: relative;
+  bottom: 80vh;
+  left:40vw;
+}
+
+.scoreBtn1{
+  position: relative;
+  bottom: 82vh;
+  left: 43vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* width: 20vw;
+  height: 8vh;; */
+  background-color: white;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: yellowgreen;
+  border-radius: 10px;
+  border: 3px solid black;
+  color: white;
 }

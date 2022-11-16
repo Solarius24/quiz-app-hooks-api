@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 30vh;
+  right: 0vw;
+}
+
+input {
+  padding: 10px;
+  margin: 20px;
+  width: 30vw;
+  border: 5px lightcoral solid;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+button {
+  width: 10vw;
+  font-size: 2vw;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  padding: 5px;
+  color: yellow;
+}
+
+.message {
+  font-size: 30px;
+  color: green;
+  font-weight: 400;
+  background-color: greenyellow;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+span {
+  color: red;
+  font-weight: 600;
+}
+
+.logInBtm {
+  position: fixed;
+  bottom: 89vh;
+  left: 88vw;
+}
+
+.buttomContainer {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2rem;
+}

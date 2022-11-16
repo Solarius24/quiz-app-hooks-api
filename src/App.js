@@ -4,25 +4,14 @@ import Quiz from "./components/Quiz";
 import ScoreCard from "./components/ScoreCard";
 import { useState } from "react";
 import ScoreBoard from "./components/ScoreBoard";
+import LogIn from "./components/LogIn/LogIn";
+import RegistrationForm from "./components/LogIn/RegistrationForm";// 
 
 const quizDataHistory = [
   {
     name: "Marek",
     difficulty: "Easy",
-    category: "History",
-    scoreValue: 0,
-  },
-
-  {
-    name: "Janek",
-    difficulty: "Easy",
-    category: "History",
-    scoreValue: 0,
-  },
-  {
-    name: "Tomek",
-    difficulty: "Easy",
-    category: "History",
+    category: "22",
     scoreValue: 0,
   },
 ];
@@ -32,10 +21,7 @@ const App = () => {
   const [category, setCategory] = useState("any");
   const [difficulty, setDifficulty] = useState("any");
   const [name, setName] = useState("Player");
-  const [appUserData, setAppUserData] = useState(
-    JSON.parse(localStorage.getItem("quiz1"))
-  );
-   console.log(appUserData)
+  const [appUserData, setAppUserData] = useState([]);
 
   return (
     <>
@@ -80,6 +66,10 @@ const App = () => {
           path="/scorelist"
           element={<ScoreBoard quizData={appUserData} />}
         />
+        <Route path="/login" element={<LogIn />}/>
+        <Route path="/registration" element={<RegistrationForm/>}/>
+
+
       </Routes>
     </>
   );

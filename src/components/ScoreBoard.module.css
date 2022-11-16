@@ -39,10 +39,11 @@
   border: 2px black solid;
   padding-top: 10px;
   padding-bottom: 10px;
+  font-weight: 600;
 }
 
-.scoreBtn {
-  position: relative;
-  bottom: 70vh;
-  left:85vw
+.scoreBoardBtm {
+  position: fixed;
+  left: 88vw;
+  bottom: 88vh;
 }

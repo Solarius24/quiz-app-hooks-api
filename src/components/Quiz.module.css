@@ -1,0 +1,110 @@
+
+.quiz_container {
+  position: fixed;
+  top: 14vh;
+  left: 25vw;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+  width: 50vw;
+  overflow: hidden;
+}
+
+.quiz_container h2,
+h1 {
+  background-color: purple;
+  padding: 1rem;
+  text-align: center;
+  margin: 0;
+
+}
+.quiz_container h1 {
+  background-color: lightslategray;
+}
+
+.question {
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.answer {
+  margin: 2rem 2rem;
+}
+.answer input {
+  text-align: left;
+  margin: 0;
+  width: max-content;
+}
+.answer label {
+  font-size: 1.3rem;
+  margin: 50px;
+}
+.scoreBoard{
+  position: fixed;
+  top:25vh;
+  left: 25vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 10px solid black;
+  width:50vw;
+  height:50vh;
+  background-color: aqua;
+}
+.scoreBoard h2 {
+  padding: 5px;
+  background-color: blue;
+  margin: 0;
+  width:100%;
+  text-align: center;
+}
+
+.scoreBoardBtm{
+  width:40vw;
+  margin: 0.3rem;
+}
+
+.scoreBoard_homeBtm {
+  position:fixed;
+  left:88vw;
+}
+.scoreCard {
+  display: none;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+  width: 600px;
+  overflow: hidden;
+}
+.scoreCard h1 {
+  padding: 0.2rem;
+  text-align: center;
+  justify-content: center;
+  color: red;
+}
+
+.player_name {
+  position: fixed;
+  bottom: 93vh;
+  left: 25vw;
+  color: darkblue;
+  font-size: 2rem;
+  padding: 10px;
+  width: 50vw;
+  text-align: center;
+  background-color: lightgreen;
+  border-radius: 10px;
+  border: 3px solid black;
+}
+
+.homePageBtm {
+  position: fixed;
+  bottom: 90vh;
+  left: 88vw;
+}
+.submitBtm {
+  width: 100%;
+  font-size: 2rem;
+}

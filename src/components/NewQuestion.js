@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import classes from './Quiz.module.css'
 
 export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
   const { incorrect_answers } = dataApi;
@@ -23,12 +24,11 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
   };
   const renderAnswers = allAnswers.map((answer) => {
     return (
-      <li key={answer}>
+      <li key={answer} className={classes.answer}>
         <input
           type="radio"
           value={answer}
           name="but"
-          className="answer"
           onChange={onChangeHandler}
         />
         <label> {answer}</label>
@@ -36,10 +36,12 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
     );
   });
 
+
   return (
-    <div className="quiz-header" style={display}>
+    <div style={display}>
       <h1>{question}</h1>
-      <ul>{renderAnswers}</ul>
+      <ul className={classes.question}>{renderAnswers}</ul>
     </div>
   );
 };
+

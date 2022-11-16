@@ -1,6 +1,8 @@
 import { React, useState } from "react";
-import "./WelcomeScreen.css";
+import classes from "./WelcomeScreen.module.css";
 import { Link } from "react-router-dom";
+import Button from "../components/UI/Button";
+import Card from "../components/UI/Card";
 
 export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
   const [userName, setUserName] = useState("");
@@ -21,10 +23,10 @@ export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
     return setDifficulty(difficultyLevel.value);
   };
   return (
-    <div className="welcomeContainer">
-      <div className="title">
-        <div className="dropdown-container">
-          <form className="form-input_user">
+    <Card>
+      <div className={classes.title}>
+        <div className={classes.dropdownContainer}>
+          <form className={classes.formInputUser}>
             <label>ENTER PLAYER NAME</label>
             <input
               onChange={userNameHandler}
@@ -32,10 +34,10 @@ export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
               value={userName}
             ></input>
           </form>
-          <label className="dropdown-category">SELECT CATEGORY: </label>
+          <label className="dropdownCategory">SELECT CATEGORY: </label>
           <select
             onChange={selectHandler}
-            className="dropdown-option"
+            className={classes.dropdownOption}
             id="select"
           >
             <option value="any">Any Category</option>
@@ -64,10 +66,12 @@ export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
             <option value="31">Entertainment: Japanese Anime and Manga</option>
             <option value="32">Entertainment: Cartoon and Animations</option>
           </select>
-          <label className="dropdown-category">SELECT DIFFICULTY LEVEL: </label>
+          <label className={classes.dropdownCategory}>
+            SELECT DIFFICULTY LEVEL:{" "}
+          </label>
           <select
             onChange={difficultyHandler}
-            className="dropdown-option"
+            className={classes.dropdownOption}
             id="difficultyLevel"
           >
             <option value="any">Any Difficulty</option>
@@ -80,13 +84,18 @@ export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
         <p>Quiz App</p>
         <h1>ENJOY IT !!!</h1>
         <Link to="/quiz">
-          <button className="startBtn">PRESS TO START</button>
+          <Button id={classes.startBtm}>PRESS TO START</Button>
         </Link>
-        <Link to="/scorelist" >
-          <button className=" scoreBtn1">SCORE LIST</button>
+        <header>
+        <Link to="/login">
+        <Button className={classes.scoreBtm}>LOG IN</Button>
         </Link>
+        <Link to="/scorelist">
+          <Button className={classes.scoreBtm}>SCORE LIST</Button>
+        </Link>
+        </header>
       </div>
-    </div>
+    </Card>
   );
 };
 

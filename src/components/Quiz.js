@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NewQuestion } from "./NewQuestion";
-import "./Quiz.css";
+import classes from "./Quiz.module.css";
 import { Loader } from "./Loader";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "./UI/Button";
+import Card from "../components/UI/Card"
 
-const Quiz = ({ setScoreValue, category, difficulty,name}) => {
+const Quiz = ({ setScoreValue, category, difficulty, name }) => {
   const [dataApi, setDataApi] = useState(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [value, setValue] = useState(0);
@@ -30,50 +32,47 @@ const Quiz = ({ setScoreValue, category, difficulty,name}) => {
       const dataApiNew = data.data.results;
       setDataApi(dataApiNew);
     };
-    const myTimeout =() => setTimeout(dataFetch, 5000);
-    myTimeout()
-  }, []);
+    dataFetch();
+    // const myTimeout =() => setTimeout(dataFetch, 2000);
+    // myTimeout()
+  }, [category, difficulty]);
 
   const click = () => {
-
     if (questionIndex < 9) {
       setQuestionIndex(questionIndex + 1);
       if (userAnswer === dataApi[questionIndex].correct_answer) {
         setValue(value + 10);
         setScoreValue(value);
-
       }
     }
     if (questionIndex >= 9) {
-     
       return navigate("/quiz/score");
     }
   };
 
-  if (dataApi === null) {
-    return <Loader />;
-  } else if (dataApi !== null) {
+  if (dataApi === null || dataApi.length === 0) {
+    return <Card>
+      <Loader />
+      </Card>;
+  } else if (dataApi.length > 0) {
     return (
-      <>
-        <nav>
-          <ul>
-            <li className="homeBtn">
-              <Link to="/" className="homeBtn">
-                Home
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <div className="player_name">PLAYER NAME: {name}</div>
-        <div className="quiz-container">
+      <Card>
+        <header>
+          <Link to="/">
+            <Button className={classes.homePageBtm}>HomePage</Button>
+          </Link>
+          <div className={classes.player_name}>PLAYER NAME: {name}</div>
+        </header>
+        <div className={classes.quiz_container}>
           <h2>{questionIndex + 1}/10</h2>
-          <NewQuestion
+          <NewQuestion 
             dataApi={dataApi[questionIndex]}
             setUserAnswer={setUserAnswer}
           />
-          <button onClick={click}>Submit</button>
+          <Button className={classes.submitBtm} onClick={click}>Submit</Button>
+          {/* <button onClick={click}>Submit</button> */}
         </div>
-      </>
+      </Card>
     );
   }
 };

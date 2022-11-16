@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./Quiz.css";
+import classes from "./Quiz.module.css";
+import Card from "../components/UI/Card";
+import Button from "./UI/Button";
 
 const ScoreCard = ({
   value,
@@ -15,47 +17,47 @@ const ScoreCard = ({
   );
 
   const quizDataHandler = () => {
-    const userData = 
-      {
-        name: name,
-        category: category,
-        difficulty: difficulty,
-        scoreValue: scoreValue,
-      }
-    
+    const userData = {
+      name: name,
+      category: category,
+      difficulty: difficulty,
+      scoreValue: scoreValue,
+    };
 
     setQuizData((prevQuizData) => {
       return [userData, ...prevQuizData];
     });
   };
 
+  console.log(quizData);
+
   useEffect(() => {
-    localStorage.setItem("quiz1", JSON.stringify(quizData));
-    setAppUserData(quizData)
-  }, [quizData]);
+    if (quizData === null) localStorage.setItem("quiz1", JSON.stringify([{}]));
+    else {
+      setAppUserData(quizData);
+      localStorage.setItem("quiz1", JSON.stringify(quizData));
+    }
+  });
 
   return (
-    <>
-      <nav>
-        <ul>
-          <li className="homeBtn">
-            <Link to="/" className="homeBtn">
-              Home
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <div className="quiz-container">
+    <Card>
+      <Link to="/">
+        <Button className={classes.scoreBoard_homeBtm}>Homepage</Button>
+      </Link>
+      <div className={classes.scoreBoard}>
         <h2>YOUR SCORE</h2>
         <h2>{value} %</h2>
         <Link to="/quiz">
-          <button>START NEW QUIZ</button>
+          <Button className={classes.scoreBoardBtm}>START NEW QUIZ</Button>
         </Link>
-
-          <button onClick={quizDataHandler}>ADD TO SCORECARD</button>
-    
+        <Button className={classes.scoreBoardBtm} onClick={quizDataHandler}>
+          ADD TO SCORECARD
+        </Button>
+        <Link to="/scorelist">
+          <Button className={classes.scoreBoardBtm}>SCORE LIST</Button>
+        </Link>
       </div>
-    </>
+    </Card>
   );
 };
 

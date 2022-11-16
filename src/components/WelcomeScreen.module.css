@@ -18,31 +18,35 @@
 }
 .title p {
   position: relative;
-  bottom: 25vh;
+  bottom: 30vh;
   font-size: 5rem;
 }
-.startBtn {
+
+#startBtm {
   position: relative;
-  top: 3vh;
+  top: 0.8vh;
   width: 20vw;
   border: 5px orange solid;
   border-radius: 20px;
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: 2rem;
+  color:blue;
   text-align: center;
   padding: 2px;
+  background-color: white;
 }
-.startBtn:hover {
-  background-color: yellowgreen;
-  color: black;
+
+#startBtm:hover {
+  background-color: purple;
+  color: white;
 }
-.startBtn:active {
+#startBtm:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
-.dropdown-container {
+.dropdownContainer {
   position: relative;
   top: 30vh;
   display: flex;
@@ -53,38 +57,33 @@
   font-weight: 400;
 }
 
-.dropdown-option {
+.dropdownOption {
+  border: 2px solid black;
   font-size: 15px;
+  border-radius: 20px;
 }
-.form-input_user {
+.formInputUser {
   display: flex;
   flex-direction: column;
-  gap:5px;
-  font-size:15px;
-  
+  gap: 5px;
+  font-size: 15px;
+
+}
+.formInputUser input {
+  border: 2px solid black;
+  font-size: 30px;
+  border-radius: 20px;
 }
 
 .scorelist {
   position: relative;
   bottom: 80vh;
-  left:40vw;
+  left: 40vw;
 }
 
-.scoreBtn1{
+.scoreBtm{
   position: relative;
-  bottom: 82vh;
-  left: 43vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* width: 20vw;
-  height: 8vh;; */
-  background-color: white;
-  font-size: 20px;
-  font-weight: 600;
-  background-color: yellowgreen;
-  border-radius: 10px;
-  border: 3px solid black;
-  color: white;
+  bottom: 90vh;
+  left:38vw;
+  display: inline-block;
 }

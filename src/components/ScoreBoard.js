@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./ScoreBoard.module.css";
 import ScorePlayer from "./ScorePlayer";
 import { Link } from "react-router-dom";
-import Card from ".//UI/Card";
+import Card from "./UI/Card";
 import Button from "./UI/Button";
 
 const ScoreBoard = ({ quizData }) => {

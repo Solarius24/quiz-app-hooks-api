@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Quiz.module.css";
-import Card from "../components/UI/Card";
+import Card from "./UI/Card";
 import Button from "./UI/Button";
 
 const ScoreCard = ({

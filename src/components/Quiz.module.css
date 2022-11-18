@@ -1,4 +1,3 @@
-
 .quiz_container {
   position: fixed;
   top: 14vh;
@@ -10,64 +9,67 @@
   overflow: hidden;
 }
 
-.quiz_container h2,
-h1 {
+.quiz_container_h2,
+.quiz_container_h1 {
   background-color: purple;
   padding: 1rem;
   text-align: center;
   margin: 0;
-
 }
-.quiz_container h1 {
+.quiz_container_h1 {
   background-color: lightslategray;
+  padding: 1rem;
 }
 
 .question {
   list-style-type: none;
-  padding: 0;
   font-size: 1.2rem;
   cursor: pointer;
+}
+.question_h1{
+padding: 1rem;
 }
 .answer {
   margin: 2rem 2rem;
 }
-.answer input {
+.answer_input {
   text-align: left;
-  margin: 0;
   width: max-content;
+  margin-left: 1rem;
 }
-.answer label {
+.answer_label {
   font-size: 1.3rem;
-  margin: 50px;
+  margin: 5px;
+  margin-left: 20px;
 }
-.scoreBoard{
+.scoreBoard {
   position: fixed;
-  top:25vh;
+  top: 25vh;
   left: 25vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 10px solid black;
-  width:50vw;
-  height:50vh;
+  width: 50vw;
+  height: 50vh;
   background-color: aqua;
 }
 .scoreBoard h2 {
   padding: 5px;
   background-color: blue;
   margin: 0;
-  width:100%;
+  width: 100%;
   text-align: center;
 }
 
-.scoreBoardBtm{
-  width:40vw;
+.scoreBoardBtm {
+  width: 40vw;
   margin: 0.3rem;
 }
 
 .scoreBoard_homeBtm {
-  position:fixed;
-  left:88vw;
+  position: fixed;
+  left: 88vw;
 }
 .scoreCard {
   display: none;
@@ -102,7 +104,7 @@ h1 {
 .homePageBtm {
   position: fixed;
   bottom: 90vh;
-  left: 88vw;
+  left: 86vw;
 }
 .submitBtm {
   width: 100%;

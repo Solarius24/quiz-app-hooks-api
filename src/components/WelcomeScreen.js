@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import classes from "./WelcomeScreen.module.css";
 import { Link } from "react-router-dom";
 import Button from "../components/UI/Button";
-import Card from "../components/UI/Card";
+import Card from "./UI/Card";
 
 export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
   const [userName, setUserName] = useState("");
@@ -87,8 +87,8 @@ export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
           <Button id={classes.startBtm}>PRESS TO START</Button>
         </Link>
         <header>
-        <Link to="/login">
-        <Button className={classes.scoreBtm}>LOG IN</Button>
+        <Link to="/dash/login">
+        <Button className={classes.scoreBtm}>LOG IN/SIGN UP</Button>
         </Link>
         <Link to="/scorelist">
           <Button className={classes.scoreBtm}>SCORE LIST</Button>

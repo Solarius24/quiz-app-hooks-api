@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
+  overflow: hidden;
 }
 
 .title {
@@ -18,7 +19,7 @@
 }
 .title p {
   position: relative;
-  bottom: 30vh;
+  bottom: 24vh;
   font-size: 5rem;
 }
 
@@ -83,7 +84,8 @@
 
 .scoreBtm{
   position: relative;
-  bottom: 90vh;
-  left:38vw;
+  bottom: 87vh;
+  left:36vw;
   display: inline-block;
+
 }

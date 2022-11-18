@@ -5,7 +5,7 @@ import classes from "./Quiz.module.css";
 import { Loader } from "./Loader";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./UI/Button";
-import Card from "../components/UI/Card"
+import Card from "./UI/Card"
 
 const Quiz = ({ setScoreValue, category, difficulty, name }) => {
   const [dataApi, setDataApi] = useState(null);
@@ -64,7 +64,7 @@ const Quiz = ({ setScoreValue, category, difficulty, name }) => {
           <div className={classes.player_name}>PLAYER NAME: {name}</div>
         </header>
         <div className={classes.quiz_container}>
-          <h2>{questionIndex + 1}/10</h2>
+          <h2 className={classes.quiz_container_h2}>{questionIndex + 1}/10</h2>
           <NewQuestion 
             dataApi={dataApi[questionIndex]}
             setUserAnswer={setUserAnswer}

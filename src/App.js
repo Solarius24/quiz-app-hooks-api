@@ -5,16 +5,10 @@ import ScoreCard from "./components/ScoreCard";
 import { useState } from "react";
 import ScoreBoard from "./components/ScoreBoard";
 import LogIn from "./components/LogIn/LogIn";
-import RegistrationForm from "./components/LogIn/RegistrationForm";// 
+// import RegistrationForm from "./components/LogIn/RegistrationForm"; 
+import Modal from "../src/components/ModalAuth/components/Modal"
+import Login from "./components/ModalAuth/components/Login";
 
-const quizDataHistory = [
-  {
-    name: "Marek",
-    difficulty: "Easy",
-    category: "22",
-    scoreValue: 0,
-  },
-];
 
 const App = () => {
   const [scoreValue, setScoreValue] = useState(0);
@@ -66,11 +60,10 @@ const App = () => {
           path="/scorelist"
           element={<ScoreBoard quizData={appUserData} />}
         />
-        <Route path="/login" element={<LogIn />}/>
-        <Route path="/registration" element={<RegistrationForm/>}/>
-
-
+        <Route path="/dash" element={<Modal/>} />
+        {/* <Route path="/registration" element={<RegistrationForm />} /> */}
       </Routes>
+      <Modal/>
     </>
   );
 };

@@ -24,14 +24,15 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
   };
   const renderAnswers = allAnswers.map((answer) => {
     return (
-      <li key={answer} className={classes.answer}>
+      <li key={answer} className={classes.answer_li}>
         <input
           type="radio"
           value={answer}
           name="but"
           onChange={onChangeHandler}
+          className={classes.answer_input}
         />
-        <label> {answer}</label>
+        <label className={classes.answer_label}> {answer}</label>
       </li>
     );
   });
@@ -39,7 +40,7 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
 
   return (
     <div style={display}>
-      <h1>{question}</h1>
+      <h1 className={classes.question_h1}>{question}</h1>
       <ul className={classes.question}>{renderAnswers}</ul>
     </div>
   );

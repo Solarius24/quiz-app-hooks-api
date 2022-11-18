@@ -34,12 +34,12 @@ export default function Modal() {
           <AuthProvider>
             <Routes>
               <Route element={<PrivateRoute />}>
-                <Route path="/dash" element={<Dashboard />} />
-                <Route path="/dash/update=profile" element={<UpdateProfile />} />
+                {/* <Route path="/dash" element={<Dashboard />} /> */}
+                <Route path="/update=profile" element={<UpdateProfile />} />
               </Route>
-              <Route path="/dash/signup" element={<SignUp />} />
-              <Route path="/dash/login" element={<Login />} />
-              <Route path="/dash/forgot-password" element={<ForgotPassword />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
             </Routes>
           </AuthProvider>
           {/* </BrowserRouter> */}

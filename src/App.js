@@ -60,7 +60,7 @@ const App = () => {
           path="/scorelist"
           element={<ScoreBoard quizData={appUserData} />}
         />
-        <Route path="/dash" element={<Modal/>} />
+        <Route path="/" element={<Modal/>} />
         {/* <Route path="/registration" element={<RegistrationForm />} /> */}
       </Routes>
       <Modal/>

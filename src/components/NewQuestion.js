@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import classes from './Quiz.module.css'
+import classes from "./Quiz.module.css";
 
 export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
   const { incorrect_answers } = dataApi;
@@ -37,7 +37,6 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
     );
   });
 
-
   return (
     <div style={display}>
       <h1 className={classes.question_h1}>{question}</h1>
@@ -45,4 +44,3 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
     </div>
   );
 };
-

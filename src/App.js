@@ -4,10 +4,8 @@ import Quiz from "./components/Quiz";
 import ScoreCard from "./components/ScoreCard";
 import { useState } from "react";
 import ScoreBoard from "./components/ScoreBoard";
-import LogIn from "./components/LogIn/LogIn";
-// import RegistrationForm from "./components/LogIn/RegistrationForm"; 
 import Modal from "../src/components/ModalAuth/components/Modal"
-import Login from "./components/ModalAuth/components/Login";
+
 
 
 const App = () => {
@@ -60,8 +58,6 @@ const App = () => {
           path="/scorelist"
           element={<ScoreBoard quizData={appUserData} />}
         />
-        <Route path="/" element={<Modal/>} />
-        {/* <Route path="/registration" element={<RegistrationForm />} /> */}
       </Routes>
       <Modal/>
     </>

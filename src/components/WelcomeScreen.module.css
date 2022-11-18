@@ -1,3 +1,8 @@
+
+body{
+  overflow: hidden;
+
+}
 .welcomeContainer {
   background-image: url(../images/quiz\ background.jpg);
   width: 100vw;
@@ -5,7 +10,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
-  overflow: hidden;
 }
 
 .title {

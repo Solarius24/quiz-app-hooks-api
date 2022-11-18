@@ -5,7 +5,7 @@ import classes from "./Quiz.module.css";
 import { Loader } from "./Loader";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./UI/Button";
-import Card from "./UI/Card"
+import Card from "./UI/Card";
 
 const Quiz = ({ setScoreValue, category, difficulty, name }) => {
   const [dataApi, setDataApi] = useState(null);
@@ -51,9 +51,11 @@ const Quiz = ({ setScoreValue, category, difficulty, name }) => {
   };
 
   if (dataApi === null || dataApi.length === 0) {
-    return <Card>
-      <Loader />
-      </Card>;
+    return (
+      <Card>
+        <Loader />
+      </Card>
+    );
   } else if (dataApi.length > 0) {
     return (
       <Card>
@@ -65,12 +67,13 @@ const Quiz = ({ setScoreValue, category, difficulty, name }) => {
         </header>
         <div className={classes.quiz_container}>
           <h2 className={classes.quiz_container_h2}>{questionIndex + 1}/10</h2>
-          <NewQuestion 
+          <NewQuestion
             dataApi={dataApi[questionIndex]}
             setUserAnswer={setUserAnswer}
           />
-          <Button className={classes.submitBtm} onClick={click}>Submit</Button>
-          {/* <button onClick={click}>Submit</button> */}
+          <Button className={classes.submitBtm} onClick={click}>
+            Submit
+          </Button>
         </div>
       </Card>
     );

@@ -18,7 +18,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      navigate("/dashboard");
     } catch {
       setError("Failed to sign in");
     }
@@ -31,10 +31,8 @@ export default function Login() {
       <Card>
         <Card.Body>
           <Link to="/">
-            {" "}
             <Button>HomePage</Button>
           </Link>
-
           <h2 className="w-100 text-center mt-2">Log in</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
@@ -51,12 +49,12 @@ export default function Login() {
             </Button>
           </Form>
           <div className="w-100 text-center mt-2">
-            <Link to="/forgot-password">Forgot Password</Link>
+            <Link to="/dashboard/forgot-password">Forgot Password</Link>
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2" style={{color:'yellow', backgroundColor:"black"}}>
-        Need an account? <Link to="/signup">Sign Up</Link>
+        Need an account? <Link to="/dashboard/signup">Sign Up</Link>
       </div>
     </>
   );

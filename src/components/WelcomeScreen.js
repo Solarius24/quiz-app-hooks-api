@@ -87,7 +87,7 @@ export const WelcomeScreen = ({ setCategory, setDifficulty, setName }) => {
           <Button id={classes.startBtm}>PRESS TO START</Button>
         </Link>
         <header>
-        <Link to="/login">
+        <Link to="/dashboard">
         <Button className={classes.scoreBtm}>LOG IN/SIGN UP</Button>
         </Link>
         <Link to="/scorelist">

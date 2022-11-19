@@ -12,8 +12,9 @@ const App = () => {
   const [scoreValue, setScoreValue] = useState(0);
   const [category, setCategory] = useState("any");
   const [difficulty, setDifficulty] = useState("any");
-  const [name, setName] = useState("Player");
+  const [name, setName] = useState(null);
   const [appUserData, setAppUserData] = useState([]);
+  const [isLogin, setIsLogin] = useState(false)
 
   return (
     <>
@@ -22,9 +23,11 @@ const App = () => {
           path="/"
           element={
             <WelcomeScreen
+              isLogin = {isLogin}
               setCategory={setCategory}
               setDifficulty={setDifficulty}
               setName={setName}
+              name={name}
             />
           }
         />
@@ -37,6 +40,7 @@ const App = () => {
                 category={category}
                 difficulty={difficulty}
                 name={name}
+                setName={setName}
               />
             }
           />
@@ -59,7 +63,7 @@ const App = () => {
           element={<ScoreBoard quizData={appUserData} />}
         />
       </Routes>
-      <Modal/>
+      <Modal setIsLogin={setIsLogin} setName={setName}/>
     </>
   );
 };

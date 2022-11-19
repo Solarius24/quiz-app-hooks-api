@@ -4,14 +4,17 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UpdateProfile() {
+  const playerNameRef = useRef() 
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { currentUser, updatePassword, updateEmail } = useAuth();
+  const { currentUser, updatePassword, updateEmail, UpdateProfile } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  console.log('user name',currentUser.displayName)
+  console.log(currentUser)
   function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -31,7 +34,7 @@ export default function UpdateProfile() {
 
     Promise.all(promises)
       .then(() => {
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch(() => {
         setError("Failed to update account");
@@ -48,6 +51,15 @@ export default function UpdateProfile() {
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+          <Form.Group id="playerName">
+              <Form.Label>Player Name</Form.Label>
+              <Form.Control
+                type="text"
+                ref={playerNameRef}
+                required
+                defaultValue={currentUser.displayName}
+              />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -79,8 +91,8 @@ export default function UpdateProfile() {
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        <Link to="/dashboard">Cancel</Link>
+      <div className="w-100 text-center mt-2" style={{backgroundColor:"black"}}>
+        <Link to="/dashboard" style={{color:'yellow'}}>Cancel</Link>
       </div>
     </>
   );

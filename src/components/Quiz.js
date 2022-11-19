@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./UI/Button";
 import Card from "./UI/Card";
 
-const Quiz = ({ setScoreValue, category, difficulty, name }) => {
+const Quiz = ({ setScoreValue, category, difficulty, name, setName }) => {
   const [dataApi, setDataApi] = useState(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [value, setValue] = useState(0);
@@ -61,7 +61,7 @@ const Quiz = ({ setScoreValue, category, difficulty, name }) => {
       <Card>
         <header>
           <Link to="/">
-            <Button className={classes.homePageBtm}>HomePage</Button>
+            <Button className={classes.homePageBtm} onClick ={()=>setName(null)}>HomePage</Button>
           </Link>
           <div className={classes.player_name}>PLAYER NAME: {name}</div>
         </header>

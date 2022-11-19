@@ -3,7 +3,7 @@ import { Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Dashboard({setIsLogin,setName}) {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
@@ -11,6 +11,8 @@ export default function Dashboard() {
     setError("");
     try {
       await logout();
+      setIsLogin(false)
+      setName(currentUser.displayName)
       navigate("/dashboard/login");
     } catch {
       setError("Failed to log out");
@@ -25,6 +27,9 @@ export default function Dashboard() {
           </Link>
           <h2 className="w-100 text-center mt-2">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+          <strong>Player Name:</strong>
+          {currentUser.displayName}
+          <br></br>
           <strong>Email:</strong>
           {currentUser.email}
           <Link to="/dashboard/update-profile" className="btn btn-primary w-100 mt-3">

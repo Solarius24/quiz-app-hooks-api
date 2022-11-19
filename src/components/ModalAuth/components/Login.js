@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function Login() {
+export default function Login({setIsLogin}) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
@@ -18,6 +18,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      setIsLogin(true)
       navigate("/dashboard");
     } catch {
       setError("Failed to sign in");

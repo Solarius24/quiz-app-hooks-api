@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import { Container } from "react-bootstrap";
 import AuthProvider from "../contexts/AuthContext";
 import SignUp from "./SignUp";
@@ -11,8 +11,9 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import image from "./image.jpg";
 
-export default function Modal() {
-  return ReactDOM.createPortal(
+export default function Modal({ setIsLogin,setName }) {
+  // return ReactDOM.createPortal(
+  return (
     <div
       style={{
         backgroundImage: `url(${image})`,
@@ -34,18 +35,32 @@ export default function Modal() {
           <AuthProvider>
             <Routes>
               <Route element={<PrivateRoute />}>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/dashboard/update=profile" element={<UpdateProfile />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <Dashboard setIsLogin={setIsLogin} setName={setName} />
+                  }
+                />
+                <Route
+                  path="/dashboard/update-profile"
+                  element={<UpdateProfile />}
+                />
               </Route>
               <Route path="/dashboard/signup" element={<SignUp />} />
-              <Route path="/dashboard/login" element={<Login />} />
-              <Route path="/dashboard/forgot-password" element={<ForgotPassword />} />
+              <Route
+                path="/dashboard/login"
+                element={<Login setIsLogin={setIsLogin} />}
+              />
+              <Route
+                path="/dashboard/forgot-password"
+                element={<ForgotPassword />}
+              />
             </Routes>
           </AuthProvider>
           {/* </BrowserRouter> */}
         </div>
       </Container>
-    </div>,
-    document.getElementById("portal")
+    </div>
+    // document.getElementById("portal")
   );
 }

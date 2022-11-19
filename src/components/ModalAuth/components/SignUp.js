@@ -1,43 +1,54 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext"
-import { Link , useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import {updateProfile} from 'firebase/auth'
+import { auth } from "../firebase";
 
 export default function SignUp() {
+  const playerNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const {signup} = useAuth();
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
+      return setError("Passwords do not match");
     }
 
     try {
-      setError("")
-      setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
-      navigate("/")
+      setError("");
+      setLoading(true);
+      await signup(emailRef.current.value, passwordRef.current.value);
+      updateProfile(auth.currentUser, {
+          displayName: playerNameRef.current.value,
+        });
+      
+      navigate("/dashboard");
     } catch {
-      setError("Failed to create an account")
+      setError("Failed to create an account");
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
     <>
       <Card>
         <Card.Body>
-          <h2 className="w-100 text-center mt-2" >Sign Up</h2>
+          <h2 className="w-100 text-center mt-2">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+            <Form.Group id="playerName">
+              <Form.Label>Player Name</Form.Label>
+              <Form.Control type="text" ref={playerNameRef} required />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
@@ -56,8 +67,11 @@ export default function SignUp() {
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2" style={{color:'yellow', backgroundColor:"black"}}>
-        Already have an account <Link to="/login">Log in</Link>
+      <div
+        className="w-100 text-center mt-2"
+        style={{ color: "yellow", backgroundColor: "black" }}
+      >
+        Already have an account <Link to="/dashboard/login">Log in</Link>
       </div>
     </>
   );

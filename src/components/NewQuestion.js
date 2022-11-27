@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import classes from "./Quiz.module.css";
+import classes from "components/Quiz.module.css";
+import { ErrorModal } from "components/UI/ErrorModal";
 
-export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
+export const NewQuestion = ({ dataApi, display, setUserAnswer,setAnswerChecked }) => {
+  
   const { incorrect_answers } = dataApi;
   const { correct_answer } = dataApi;
   const { question } = dataApi;
@@ -15,12 +17,15 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
     }
   }, [correct_answer, incorrect_answers]);
 
+
   const onChangeHandler = (e) => {
     if (e.target.checked) {
       const value = e.target.value;
       setUserAnswer(value);
+      setAnswerChecked(true)
+      return setUserAnswer;
     }
-    return setUserAnswer;
+    
   };
   const renderAnswers = allAnswers.map((answer) => {
     return (
@@ -38,9 +43,12 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer }) => {
   });
 
   return (
+    <>
+
     <div style={display}>
       <h1 className={classes.question_h1}>{question}</h1>
       <ul className={classes.question}>{renderAnswers}</ul>
     </div>
-  );
+    </>
+  )
 };

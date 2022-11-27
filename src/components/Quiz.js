@@ -1,54 +1,51 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { NewQuestion } from "./NewQuestion";
-import classes from "./Quiz.module.css";
-import { Loader } from "./Loader";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "./UI/Button";
-import Card from "./UI/Card";
+import { NewQuestion } from "components/NewQuestion";
+import classes from "components/Quiz.module.css";
+import { Loader } from "components/Loader";
+import Button from "components/UI/Button";
+import Card from "components/UI/Card";
+import { useData } from "context/DataContext";
+import { useGetQuizData } from "hooks/useGetQuizData";
+import { ErrorModal } from "components/UI/ErrorModal";
 
-const Quiz = ({ setScoreValue, category, difficulty, name, setName }) => {
-  const [dataApi, setDataApi] = useState(null);
+export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
+  // to ensure that user select an answer, if not he cannot submit form
+  const [answerChecked, setAnswerChecked] = useState(false); 
+  const [error, setError] = useState();
   const [value, setValue] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const linker = () => {
-      if (category === "any" && difficulty === "any") {
-        return `https://opentdb.com/api.php?amount=10`;
-      } else if (category === "any" && difficulty !== "any") {
-        return `https://opentdb.com/api.php?amount=10&difficulty=${difficulty}&type=multiple`;
-      } else if (category !== "any" && difficulty === "any") {
-        return `https://opentdb.com/api.php?amount=10&category=${category}&type=multiple`;
-      } else {
-        return `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`;
-      }
-    };
+  //custom hook to fetch quiz data (questions) from API
+  const dataApi = useGetQuizData(difficulty, category);
 
-    const dataFetch = async () => {
-      const data = await axios.get(`${linker()}`);
-      const dataApiNew = data.data.results;
-      setDataApi(dataApiNew);
-    };
-    dataFetch();
-    // const myTimeout =() => setTimeout(dataFetch, 2000);
-    // myTimeout()
-  }, [category, difficulty]);
+  //name of user who is log in received from firebase
+  const { name } = useData();
 
-  const click = () => {
-    if (questionIndex < 9) {
+  const submitQuestionHandler = () => {
+    if (questionIndex < 9 && answerChecked === true) {
       setQuestionIndex(questionIndex + 1);
+      setAnswerChecked(false);
       if (userAnswer === dataApi[questionIndex].correct_answer) {
         setValue(value + 10);
         setScoreValue(value);
       }
     }
+    if (questionIndex < 9 && answerChecked === false) {
+      setError({
+        title: "ANSWER NOT SELECTED",
+        message: "PLEASE SELECT ANSWER AND SUBMIT",
+      });
+    }
+
     if (questionIndex >= 9) {
       return navigate("/quiz/score");
     }
   };
+
+  console.log(answerChecked);
 
   if (dataApi === null || dataApi.length === 0) {
     return (
@@ -58,25 +55,43 @@ const Quiz = ({ setScoreValue, category, difficulty, name, setName }) => {
     );
   } else if (dataApi.length > 0) {
     return (
-      <Card>
-        <header>
-          <Link to="/">
-            <Button className={classes.homePageBtm} onClick ={()=>setName(null)}>HomePage</Button>
-          </Link>
-          <div className={classes.player_name}>PLAYER NAME: {name}</div>
-        </header>
-        <div className={classes.quiz_container}>
-          <h2 className={classes.quiz_container_h2}>{questionIndex + 1}/10</h2>
-          <NewQuestion
-            dataApi={dataApi[questionIndex]}
-            setUserAnswer={setUserAnswer}
+      <>
+        {error && (
+          <ErrorModal
+            title={error.title}
+            message={error.message}
+            onConfirm={() => setError(null)}
           />
-          <Button className={classes.submitBtm} onClick={click}>
-            Submit
-          </Button>
-        </div>
-      </Card>
+        )}
+        <Card>
+          <header>
+            <Link to="/">
+              <Button className={classes.homePageBtm} onClick={() => null}>
+                HomePage
+              </Button>
+            </Link>
+            <div className={classes.player_name}>
+              PLAYER NAME: {newUserName || name}
+            </div>
+          </header>
+          <div className={classes.quiz_container}>
+            <h2 className={classes.quiz_container_h2}>
+              {questionIndex + 1}/10
+            </h2>
+            <NewQuestion
+              dataApi={dataApi[questionIndex]}
+              setUserAnswer={setUserAnswer}
+              setAnswerChecked={setAnswerChecked}
+            />
+            <Button
+              className={classes.submitBtm}
+              onClick={submitQuestionHandler}
+            >
+              Submit
+            </Button>
+          </div>
+        </Card>
+      </>
     );
   }
 };
-export default Quiz;

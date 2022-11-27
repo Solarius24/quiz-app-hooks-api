@@ -23,7 +23,7 @@ const ModalOverlay = (props) => {
   );
 };
 
-const ErrorModal = (props) => {
+export const ErrorModal = (props) => {
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
@@ -41,5 +41,3 @@ const ErrorModal = (props) => {
     </React.Fragment>
   );
 };
-
-export default ErrorModal;

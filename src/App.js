@@ -1,33 +1,28 @@
 import { Route, Routes } from "react-router-dom";
-import WelcomeScreen from "./components/WelcomeScreen";
-import Quiz from "./components/Quiz";
-import ScoreCard from "./components/ScoreCard";
+import { WelcomeScreen } from "./components/WelcomeScreen";
+import { Quiz } from "./components/Quiz";
+import { ScoreCard } from "./components/ScoreCard";
 import { useState } from "react";
-import ScoreBoard from "./components/ScoreBoard";
-import Modal from "../src/components/ModalAuth/components/Modal"
-
-
+import { ScoreBoard } from "./components/ScoreBoard";
+import { Modal } from "../src/components/ModalAuth/components/Modal";
+import { DataProvider } from "./context/DataContext";
 
 const App = () => {
   const [scoreValue, setScoreValue] = useState(0);
   const [category, setCategory] = useState("any");
   const [difficulty, setDifficulty] = useState("any");
-  const [name, setName] = useState(null);
-  const [appUserData, setAppUserData] = useState([]);
-  const [isLogin, setIsLogin] = useState(false)
+  const [newUserName, setNewUserName] = useState();
 
   return (
-    <>
+    <DataProvider>
       <Routes>
         <Route
           path="/"
           element={
             <WelcomeScreen
-              isLogin = {isLogin}
               setCategory={setCategory}
               setDifficulty={setDifficulty}
-              setName={setName}
-              name={name}
+              setNewUserName={setNewUserName}
             />
           }
         />
@@ -39,8 +34,7 @@ const App = () => {
                 setScoreValue={setScoreValue}
                 category={category}
                 difficulty={difficulty}
-                name={name}
-                setName={setName}
+                newUserName={newUserName}
               />
             }
           />
@@ -48,9 +42,7 @@ const App = () => {
             path="score"
             element={
               <ScoreCard
-                setAppUserData={setAppUserData}
                 value={scoreValue}
-                name={name}
                 category={category}
                 difficulty={difficulty}
                 scoreValue={scoreValue}
@@ -58,13 +50,11 @@ const App = () => {
             }
           />
         </Route>
-        <Route
-          path="/scorelist"
-          element={<ScoreBoard quizData={appUserData} />}
-        />
+        <Route path="/scoreboard" element={<ScoreBoard />} />
       </Routes>
-      <Modal setIsLogin={setIsLogin} setName={setName}/>
-    </>
+      <Modal />
+    </DataProvider>
   );
 };
+
 export default App;

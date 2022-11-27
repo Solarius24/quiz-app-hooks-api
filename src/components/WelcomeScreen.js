@@ -1,55 +1,73 @@
-import { React, useState } from "react";
-import classes from "./WelcomeScreen.module.css";
-import { Link } from "react-router-dom";
-import Button from "../components/UI/Button";
-import Card from "./UI/Card";
-import ErrorModal from "./UI/ErrorModal";
-
+import { React, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import classes from "components/WelcomeScreen.module.css";
+import Button from "components/UI/Button";
+import Card from "components/UI/Card";
+import {ErrorModal} from "components/UI/ErrorModal";
+import { useData } from "context/DataContext";
 
 export const WelcomeScreen = ({
   setCategory,
   setDifficulty,
-  setName,
-  isLogin,
-  name
+  setNewUserName,
 }) => {
-  const [userName, setUserName] = useState("");
   const [error, setError] = useState();
+  const newUserName = useRef();
+  const category = useRef()
+  const difficultyLevel = useRef()
+  const navigate = useNavigate();
 
-  const userNameHandler = (e) => {
-    const name = e.target.value;
-    setUserName(name);
-    setName(name);
+
+  function makeNegative(num) {
+    if(num===0){
+      return
+    }
+    else if(Math.sign(num) === -1){
+      return num
+    }
+    else if(Math.sign(num) === 1){
+      const negativeNum = num * -1
+      return negativeNum
+    }
+  }
+console.log(makeNegative(0))
+  
+
+
+  //check if the user is login or logout also fetch user login name from firebase
+  const { isLogin, name } = useData();
+
+  //function to pass entered player name to app componenet
+  const userNameHandler = () => {
+    setNewUserName(newUserName.current.value);
   };
 
   const selectHandler = () => {
-    const select = document.getElementById("select");
-    return setCategory(select.value);
+setCategory(category.current.value)
   };
 
   const difficultyHandler = () => {
-    const difficultyLevel = document.getElementById("difficultyLevel");
-    return setDifficulty(difficultyLevel.value);
+    setDifficulty(difficultyLevel.current.value)
+
   };
   const errorHandlerScoreBtm = () => {
-
-    if (!isLogin) {
+    if (!isLogin()) {
       setError({
         title: "LOGIN ERROR",
         message: "PLEASE LOG IN OR SIGN UP TO VIEW THE SCORE CARD",
       });
       return;
     }
-  }
+  };
   const errorHandlerStartBtm = () => {
-    if(!isLogin && !userName){
+    if (!isLogin() && !newUserName.current.value) {
       setError({
-        title:'USER NAME ERROR',
-        message:"PLEASE ENTER PLAYER NAME"
-      })
-      return
+        title: "USER NAME ERROR",
+        message: "PLEASE ENTER PLAYER NAME OR LOG IN",
+      });
+    } else {
+      return navigate("/quiz");
     }
-
   };
 
   return (
@@ -64,17 +82,20 @@ export const WelcomeScreen = ({
       <Card>
         <div className={classes.title}>
           <div className={classes.dropdownContainer}>
-            {!isLogin && <form className={classes.formInputUser}>
-              <label>ENTER YOUR NAME ( PLAY AS A GUEST )</label>
-              <input
-                onChange={userNameHandler}
-                type="text"
-                value={userName}
-              ></input>
-            </form>}
-            {isLogin && <h2>Welcome: {name}</h2>}
+            {!isLogin() && (
+              <form className={classes.formInputUser}>
+                <label>ENTER YOUR NAME ( PLAY AS A GUEST )</label>
+                <input
+                  ref={newUserName}
+                  onChange={userNameHandler}
+                  type="text"
+                ></input>
+              </form>
+            )}
+            {isLogin() && <h2>Welcome: {name}</h2>}
             <label className="dropdownCategory">SELECT CATEGORY: </label>
-            <select
+            <select 
+              ref={category}
               onChange={selectHandler}
               className={classes.dropdownOption}
               id="select"
@@ -110,7 +131,7 @@ export const WelcomeScreen = ({
             <label className={classes.dropdownCategory}>
               SELECT DIFFICULTY LEVEL:{" "}
             </label>
-            <select
+            <select ref={difficultyLevel}
               onChange={difficultyHandler}
               className={classes.dropdownOption}
               id="difficultyLevel"
@@ -121,20 +142,22 @@ export const WelcomeScreen = ({
               <option value="hard">Hard</option>
             </select>
           </div>
-
           <p>Quiz App</p>
           <h1>ENJOY IT !!!</h1>
-          <Link to={(name || userName) && "/quiz"}>
-            <Button id={classes.startBtm} onClick={errorHandlerStartBtm}>PRESS TO START</Button>
-          </Link>
+          <Button id={classes.startBtm} onClick={errorHandlerStartBtm}>
+            PRESS TO START
+          </Button>
           <header>
             <Link to="/dashboard">
               <Button className={classes.scoreBtm}>
-                {isLogin ? "LOG OUT" : "LOG IN/SIGN UP"}
+                {isLogin() ? "LOG OUT" : "LOG IN/SIGN UP"}
               </Button>
             </Link>
-            <Link to={isLogin ? "/scorelist" : ""}>
-              <Button className={classes.scoreBtm} onClick={errorHandlerScoreBtm}>
+            <Link to={isLogin() ? "/scoreboard" : ""}>
+              <Button
+                className={classes.scoreBtm}
+                onClick={errorHandlerScoreBtm}
+              >
                 SCORE LIST
               </Button>
             </Link>
@@ -145,4 +168,4 @@ export const WelcomeScreen = ({
   );
 };
 
-export default WelcomeScreen;
+

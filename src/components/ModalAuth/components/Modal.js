@@ -3,7 +3,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import AuthProvider from "../contexts/AuthContext";
 import SignUp from "./SignUp";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {Route, Routes,BrowserRouter } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
@@ -11,7 +11,7 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import image from "./image.jpg";
 
-export default function Modal({ setIsLogin,setName }) {
+export function Modal({setName }) {
   // return ReactDOM.createPortal(
   return (
     <div
@@ -38,7 +38,7 @@ export default function Modal({ setIsLogin,setName }) {
                 <Route
                   path="/dashboard"
                   element={
-                    <Dashboard setIsLogin={setIsLogin} setName={setName} />
+                    <Dashboard/>
                   }
                 />
                 <Route
@@ -49,7 +49,7 @@ export default function Modal({ setIsLogin,setName }) {
               <Route path="/dashboard/signup" element={<SignUp />} />
               <Route
                 path="/dashboard/login"
-                element={<Login setIsLogin={setIsLogin} />}
+                element={<Login  />}
               />
               <Route
                 path="/dashboard/forgot-password"

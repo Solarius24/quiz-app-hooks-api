@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function Login({setIsLogin}) {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
@@ -12,21 +12,19 @@ export default function Login({setIsLogin}) {
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      setIsLogin(true)
-      navigate("/dashboard");
+      setError("")
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      navigate("/dashboard")
     } catch {
-      setError("Failed to sign in");
+      setError("Failed to log in")
     }
 
-    setLoading(false);
+    setLoading(false)
   }
-
   return (
     <>
       <Card>

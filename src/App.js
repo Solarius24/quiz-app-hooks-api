@@ -50,7 +50,7 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="/scoreboard" element={<ScoreBoard />} />
+        <Route path="scoreboard" element={<ScoreBoard />} />
       </Routes>
       <Modal />
     </DataProvider>

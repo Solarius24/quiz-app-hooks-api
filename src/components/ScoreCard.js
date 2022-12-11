@@ -32,7 +32,7 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
   };
 
   //function define in DataContext.js allow to add data to firebase and display on the ScoreBoard
-  function addToScoreCard() {
+  function addToScoreBoard() {
     if (isLogin()) {
       inputData(name, difficulty, category, scoreValue);
       navigate("/scoreboard");
@@ -59,14 +59,14 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
         <Link to="/quiz">
           <Button className={classes.scoreBoardBtm}>START NEW QUIZ</Button>
         </Link>
-        <Button className={classes.scoreBoardBtm} onClick={addToScoreCard}>
-          ADD TO SCORECARD
+        <Button className={classes.scoreBoardBtm} onClick={addToScoreBoard}>
+          ADD TO SCOREBOARD
         </Button>
         <Button
           className={classes.scoreBoardBtm}
           onClick={errorHandlerViewScoreBoardBtn}
         >
-          SCORE LIST
+          VIEW SCORE BOARD
         </Button>
       </div>
     </Card>

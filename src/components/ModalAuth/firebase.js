@@ -2,12 +2,12 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 
 const app = firebase.initializeApp({
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: "AIzaSyAhGMkXFwSnU6c0AHgwK1_qaESQu6uquPE",
+  authDomain: "quiz-app-33a69.firebaseapp.com",
+  projectId: "quiz-app-33a69",
+  storageBucket: "quiz-app-33a69.appspot.com",
+  messagingSenderId: "843722717161",
+  appId: "1:843722717161:web:2ea9a609ee20c8ef007d78",
 });
 
 export const auth = app.auth();

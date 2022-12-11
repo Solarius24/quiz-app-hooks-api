@@ -45,12 +45,10 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
     }
   };
 
-  console.log(answerChecked);
-
   if (dataApi === null || dataApi.length === 0) {
     return (
       <Card>
-        <Loader />
+        < Loader/>
       </Card>
     );
   } else if (dataApi.length > 0) {

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import classes from "components/WelcomeScreen.module.css";
 import Button from "components/UI/Button";
 import Card from "components/UI/Card";
-import {ErrorModal} from "components/UI/ErrorModal";
+import { ErrorModal } from "components/UI/ErrorModal";
 import { useData } from "context/DataContext";
 
 export const WelcomeScreen = ({
@@ -13,26 +13,9 @@ export const WelcomeScreen = ({
 }) => {
   const [error, setError] = useState();
   const newUserName = useRef();
-  const category = useRef()
-  const difficultyLevel = useRef()
+  const category = useRef();
+  const difficultyLevel = useRef();
   const navigate = useNavigate();
-
-
-  function makeNegative(num) {
-    if(num===0){
-      return
-    }
-    else if(Math.sign(num) === -1){
-      return num
-    }
-    else if(Math.sign(num) === 1){
-      const negativeNum = num * -1
-      return negativeNum
-    }
-  }
-console.log(makeNegative(0))
-  
-
 
   //check if the user is login or logout also fetch user login name from firebase
   const { isLogin, name } = useData();
@@ -43,12 +26,11 @@ console.log(makeNegative(0))
   };
 
   const selectHandler = () => {
-setCategory(category.current.value)
+    setCategory(category.current.value);
   };
 
   const difficultyHandler = () => {
-    setDifficulty(difficultyLevel.current.value)
-
+    setDifficulty(difficultyLevel.current.value);
   };
   const errorHandlerScoreBtm = () => {
     if (!isLogin()) {
@@ -94,7 +76,7 @@ setCategory(category.current.value)
             )}
             {isLogin() && <h2>Welcome: {name}</h2>}
             <label className="dropdownCategory">SELECT CATEGORY: </label>
-            <select 
+            <select
               ref={category}
               onChange={selectHandler}
               className={classes.dropdownOption}
@@ -131,7 +113,8 @@ setCategory(category.current.value)
             <label className={classes.dropdownCategory}>
               SELECT DIFFICULTY LEVEL:{" "}
             </label>
-            <select ref={difficultyLevel}
+            <select
+              ref={difficultyLevel}
               onChange={difficultyHandler}
               className={classes.dropdownOption}
               id="difficultyLevel"
@@ -167,5 +150,3 @@ setCategory(category.current.value)
     </>
   );
 };
-
-

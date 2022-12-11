@@ -31,7 +31,7 @@ export function useData() {
 
   function inputData(name, difficulty, category, scoreValue) {
     addDoc(ScoreListData, {
-      date: new Date().toString(),
+      date: new Date().toUTCString(),
       playerName: name,
       difficultyLevel: difficulty,
       category: category,
@@ -49,7 +49,7 @@ export function useData() {
       setScoreDataFirebase(score);
     }
     getScoreData();
-  }, []);
+  });
 
   const value = {
     inputData,

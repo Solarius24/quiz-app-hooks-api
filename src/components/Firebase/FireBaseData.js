@@ -1,14 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
-import { useEffect } from "react";
+import { getFirestore, collection } from "firebase/firestore";
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCRlBghfAPmA916o8pLJWpXnNKsoDeZPJg",
-  authDomain: "auth-development-d7045.firebaseapp.com",
-  projectId: "auth-development-d7045",
-  storageBucket: "auth-development-d7045.appspot.com",
-  messagingSenderId: "31242458352",
-  appId: "1:31242458352:web:4e1ea32ee721de7dd41e35",
+  apiKey: "AIzaSyAhGMkXFwSnU6c0AHgwK1_qaESQu6uquPE",
+  authDomain: "quiz-app-33a69.firebaseapp.com",
+  projectId: "quiz-app-33a69",
+  storageBucket: "quiz-app-33a69.appspot.com",
+  messagingSenderId: "843722717161",
+  appId: "1:843722717161:web:2ea9a609ee20c8ef007d78"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import classes from "components/Quiz.module.css";
-import { ErrorModal } from "components/UI/ErrorModal";
+import classes from "../pages/quiz/Quiz.module.css";
+import { ErrorModal } from "./UI/ErrorModal";
 
 export const NewQuestion = ({ dataApi, display, setUserAnswer,setAnswerChecked }) => {
   

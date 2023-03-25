@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import classes from "./ScoreBoard.module.css";
-import Card from "components/UI/Card";
+import Card from "components/UI/CardBg";
 import Button from "components/UI/Button";
-// import { useData } from "context/DataContext";
-import { ScoreListData } from "../components/Firebase/FireBaseData";
-import { getDocs } from "firebase/firestore";
+import { useDocument } from "hooks/useDocument";
+
 
 export const ScoreBoard = () => {
   const [data, setData] = useState();
   const [order, setOrder] = useState("ASC");
 
-  useEffect(() => {
-    async function getScoreData() {
-      const Snapshot = await getDocs(ScoreListData);
-      const score = Snapshot.docs.map((doc) => doc.data());
-      setData(score);
-    }
-    getScoreData();
-  }, []);
+  const {document} = useDocument("score")
+  setData(document)
 
   if (data === undefined) {
     return;

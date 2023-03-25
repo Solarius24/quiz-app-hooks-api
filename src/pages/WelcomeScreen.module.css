@@ -1,0 +1,52 @@
+.container {
+  background-image: url('../images/quiz_background.jpg');
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+}
+
+
+.btm{
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: transparent;
+
+}
+.form_container{
+  border-radius: 10px;
+  background-color: lightgreen;
+  width:40vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 30vw;
+  margin-top: 5vh;
+  padding: 25px;
+
+}
+
+#startBtm {
+  margin-top: 2vh;
+  width: 100%;
+  border: 5px orange solid;
+  border-radius: 20px;
+  font-size: 2rem;
+  color: blue;
+  text-align: center;
+  padding: 2px;
+  background-color: white;
+ 
+}
+
+#startBtm:hover {
+  background-color: purple;
+  color: white;
+}
+#startBtm:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

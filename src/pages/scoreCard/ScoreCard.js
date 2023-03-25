@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import classes from "components/Quiz.module.css";
-import Card from "components/UI/Card";
+import classes from "../quiz/Quiz.module.css";
+import Card from "components/UI/CardBg";
 import Button from "components/UI/Button";
-import { useData } from "context/DataContext";
+import { useAuthContext} from "context/AuthContext";
 import { ErrorModal } from "components/UI/ErrorModal";
+import useFirestore from "hooks/useFirestore";
 
 export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
   const [error, setError] = useState();
-  const { inputData, name, isLogin } = useData();
+  const {addDocument} = useFirestore("score")
+  const currentUser = useAuthContext()
   const navigate = useNavigate();
 
   const errorHandlerAddScoreBtn = () => {
-    if (!isLogin()) {
+    if (!currentUser) {
       setError({
         title: "USER LOG IN ERROR",
         message: "PLEASE LOG IN OR SIGN UP TO ADD SCORE TO THE SCOREBOARD",
@@ -21,7 +23,7 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
   };
 
   const errorHandlerViewScoreBoardBtn = () => {
-    if (!isLogin()) {
+    if (!currentUser) {
       setError({
         title: "USER LOG IN ERROR",
         message: "PLEASE LOG IN OR SIGN UP TO VIEW SCOREBOARD",
@@ -33,8 +35,8 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
 
   //function define in DataContext.js allow to add data to firebase and display on the ScoreBoard
   function addToScoreBoard() {
-    if (isLogin()) {
-      inputData(name, difficulty, category, scoreValue);
+    if (currentUser) {
+      addDocument(currentUser.displayName, difficulty, category, scoreValue);
       navigate("/scoreboard");
     } else {
       errorHandlerAddScoreBtn();

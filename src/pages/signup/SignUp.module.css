@@ -1,0 +1,11 @@
+.signup_container{
+    margin-left: 35vw;
+    display:flex;
+    width: 30vw;
+    font-size: 20px;
+}
+.scoreBoard_homeBtm {
+    position: fixed;
+    right: 0;
+    top: 0;
+  }

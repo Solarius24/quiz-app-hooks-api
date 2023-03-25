@@ -26,8 +26,8 @@
   font-size: 1.2rem;
   cursor: pointer;
 }
-.question_h1{
-padding: 1rem;
+.question_h1 {
+  padding: 1rem;
 }
 .answer {
   margin: 2rem 2rem;
@@ -69,7 +69,8 @@ padding: 1rem;
 
 .scoreBoard_homeBtm {
   position: fixed;
-  left: 88vw;
+  right: 0;
+  top: 0;
 }
 .scoreCard {
   display: none;

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NewQuestion } from "components/NewQuestion";
-import classes from "components/Quiz.module.css";
+import classes from "./Quiz.module.css";
 import { Loader } from "components/Loader";
 import Button from "components/UI/Button";
-import Card from "components/UI/Card";
-import { useData } from "context/DataContext";
+import Card from "components/UI/CardBg";
+import { useAuthContext} from "context/AuthContext";
 import { useGetQuizData } from "hooks/useGetQuizData";
 import { ErrorModal } from "components/UI/ErrorModal";
 
@@ -22,7 +22,7 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
   const dataApi = useGetQuizData(difficulty, category);
 
   //name of user who is log in received from firebase
-  const { name } = useData();
+  const  currentUser  = useAuthContext();
 
   const submitQuestionHandler = () => {
     if (questionIndex < 9 && answerChecked === true) {
@@ -69,7 +69,7 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
               </Button>
             </Link>
             <div className={classes.player_name}>
-              PLAYER NAME: {newUserName || name}
+              PLAYER NAME: {currentUser ? currentUser.displayName : newUserName}
             </div>
           </header>
           <div className={classes.quiz_container}>

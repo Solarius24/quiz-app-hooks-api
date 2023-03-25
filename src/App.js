@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { WelcomeScreen } from "./components/WelcomeScreen";
-import { Quiz } from "./components/Quiz";
-import { ScoreCard } from "./components/ScoreCard";
+import { WelcomeScreen } from "pages/WelcomeScreen";
+import { Quiz } from "pages/quiz/Quiz";
+import { ScoreCard } from "pages/scoreCard/ScoreCard";
 import { useState } from "react";
 import { ScoreBoard } from "./components/ScoreBoard";
-import { Modal } from "../src/components/ModalAuth/components/Modal";
-import { DataProvider } from "./context/DataContext";
+import { AuthContextProvider } from "./context/AuthContext";
+import Login from "pages/login/Login";
+import SignUp from "pages/signup/SignUp";
 
 const App = () => {
   const [scoreValue, setScoreValue] = useState(0);
@@ -14,7 +15,7 @@ const App = () => {
   const [newUserName, setNewUserName] = useState();
 
   return (
-    <DataProvider>
+    <AuthContextProvider>
       <Routes>
         <Route
           path="/"
@@ -50,10 +51,11 @@ const App = () => {
             }
           />
         </Route>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
         <Route path="scoreboard" element={<ScoreBoard />} />
       </Routes>
-      <Modal />
-    </DataProvider>
+    </AuthContextProvider>
   );
 };
 

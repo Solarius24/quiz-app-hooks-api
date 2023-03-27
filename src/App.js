@@ -1,10 +1,10 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { WelcomeScreen } from "pages/WelcomeScreen";
 import { Quiz } from "pages/quiz/Quiz";
 import { ScoreCard } from "pages/scoreCard/ScoreCard";
 import { useState } from "react";
-import { ScoreBoard } from "./components/ScoreBoard";
-import { AuthContextProvider } from "./context/AuthContext";
+import { ScoreBoard } from "./pages/scoreBoard/ScoreBoard";
+import { useAuthContext } from "./context/AuthContext";
 import Login from "pages/login/Login";
 import SignUp from "pages/signup/SignUp";
 
@@ -13,17 +13,18 @@ const App = () => {
   const [category, setCategory] = useState("any");
   const [difficulty, setDifficulty] = useState("any");
   const [newUserName, setNewUserName] = useState();
+  const currentUser = useAuthContext();
+  console.log("App", currentUser)
 
   return (
-    <AuthContextProvider>
       <Routes>
         <Route
           path="/"
           element={
             <WelcomeScreen
-              setCategory={setCategory}
-              setDifficulty={setDifficulty}
-              setNewUserName={setNewUserName}
+              setCategoryApp={setCategory}
+              setDifficultyApp={setDifficulty}
+              setNewUserNameApp={setNewUserName}
             />
           }
         />
@@ -31,12 +32,16 @@ const App = () => {
           <Route
             index
             element={
-              <Quiz
-                setScoreValue={setScoreValue}
-                category={category}
-                difficulty={difficulty}
-                newUserName={newUserName}
-              />
+              (currentUser || newUserName) ? (
+                <Quiz
+                  setScoreValue={setScoreValue}
+                  category={category}
+                  difficulty={difficulty}
+                  newUserName={newUserName}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
           <Route
@@ -51,11 +56,13 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
-        <Route path="scoreboard" element={<ScoreBoard />} />
+        <Route
+          path="/login"
+          element={(!currentUser || !newUserName) ? <Login /> : <Navigate to="/" />}
+        />
+        <Route path="/signup" element={!currentUser ? <SignUp /> : <Navigate to="/"/>} />
+        <Route path="/scoreboard" element={<ScoreBoard />} />
       </Routes>
-    </AuthContextProvider>
   );
 };
 

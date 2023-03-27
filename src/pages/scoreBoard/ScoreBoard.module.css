@@ -1,14 +1,6 @@
-.board_container {
-  background-image: url("../images/quiz_background.jpg");
-  height: 100vh;
-  width: 100vw;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-}
 
 .header_container {
-  margin-top: 20vh;
+  margin-top: 15vh;
   padding: 2px;
   display: grid;
   grid-template-columns: repeat(5, 12vw);
@@ -49,6 +41,6 @@
 
 .scoreBoardBtm {
   position: fixed;
-  left: 86vw;
-  bottom: 88vh;
+top:0;
+right:0
 }

@@ -1,8 +1,10 @@
 .login_container{
+    margin-top: 20vh;
     margin-left: 35vw;
     display:flex;
     width: 30vw;
     font-size: 20px;
+    height:fit-content;
 }
 .scoreBoard_homeBtm {
     position: fixed;

@@ -33,10 +33,18 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
     }
   };
 
+
   //function define in DataContext.js allow to add data to firebase and display on the ScoreBoard
   function addToScoreBoard() {
     if (currentUser) {
-      addDocument(currentUser.displayName, difficulty, category, scoreValue);
+      const score = {
+        playerName: currentUser.displayName,
+        score:scoreValue,
+        category:category,
+        difficultyLevel:difficulty,
+      }
+
+      addDocument(score);
       navigate("/scoreboard");
     } else {
       errorHandlerAddScoreBtn();

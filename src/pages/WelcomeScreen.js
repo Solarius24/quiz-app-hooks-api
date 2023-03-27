@@ -1,4 +1,4 @@
-import { React, useRef, useState } from "react";
+import { React,useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./WelcomeScreen.module.css";
 import Button from "components/UI/Button";
@@ -6,7 +6,6 @@ import { ErrorModal } from "components/UI/ErrorModal";
 import { useAuthContext } from "../context/AuthContext";
 import Select from "react-select";
 import {
-  Container,
   Card,
   Form,
   FormGroup,
@@ -14,6 +13,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 import CardBg from "../components/UI/CardBg";
+import { useLogout } from "hooks/useLogout";
 
 //quiz categories
 const quizCategories = [
@@ -52,31 +52,25 @@ const quizDifficultyLevel = [
 ];
 
 export const WelcomeScreen = ({
-  setCategory,
-  setDifficulty,
-  setNewUserName,
+  setCategoryApp,
+  setDifficultyApp,
+  setNewUserNameApp,
 }) => {
   const [error, setError] = useState();
-  const newUserName = useRef();
-  const category = useRef();
-  const difficultyLevel = useRef();
+  const [newUserName, setNewUserName] = useState();
+  const [category, setCategory] = useState();
+  const [difficulty, setDifficulty] = useState();
   const navigate = useNavigate();
 
   //user displyName if false means that user is logout
   const currentUser = useAuthContext();
+  const {logout} = useLogout()
 
-  //function to pass entered player name to app componenet
-  const userNameHandler = () => {
-    setNewUserName(newUserName.current.value);
-  };
 
-  const selectHandler = () => {
-    setCategory(category.current.value);
-  };
+const logoutHandler = () => {
+  logout()
+}
 
-  const difficultyHandler = () => {
-    setDifficulty(difficultyLevel.current.value);
-  };
   const errorHandlerScoreBtm = () => {
     if (!currentUser) {
       setError({
@@ -86,14 +80,17 @@ export const WelcomeScreen = ({
       return;
     }
   };
-  const errorHandlerStartBtm = () => {
-    if (!currentUser && !newUserName.current.value) {
+  const errorHandlerStartBtm = (e) => {
+    if (!currentUser && !newUserName) {
       setError({
         title: "USER NAME ERROR",
         message: "PLEASE ENTER PLAYER NAME OR LOG IN",
       });
     } else {
-      return navigate("/quiz");
+      setNewUserNameApp(newUserName)
+      setDifficultyApp(difficulty)
+      setCategoryApp(category)
+      navigate("/quiz");
     }
   };
 
@@ -109,7 +106,7 @@ export const WelcomeScreen = ({
 
       <Card className={classes.btm}>
         <Link to="/login">
-          <Button className={classes.scoreBtm}>
+          <Button className={classes.scoreBtm} onClick={logoutHandler}>
             {currentUser ? "LOG OUT" : "LOG IN/SIGN UP"}
           </Button>
         </Link>
@@ -120,7 +117,6 @@ export const WelcomeScreen = ({
         </Link>
       </Card>
 
-      
       <Form className={classes.form_container}>
         <h1 className={classes.quizTitle}>Quiz App</h1>
         {!currentUser && (
@@ -128,8 +124,8 @@ export const WelcomeScreen = ({
             <FormLabel>ENTER YOUR NAME (PLAY AS A GUEST)</FormLabel>
             <FormControl
               type="text"
-              ref={newUserName}
-              onChange={userNameHandler}
+              value={newUserName}
+              onChange={(e) => setNewUserName(e.target.value)}
             ></FormControl>
           </FormGroup>
         )}
@@ -142,22 +138,20 @@ export const WelcomeScreen = ({
         <FormGroup>
           <FormLabel>SELECT CATEGORY</FormLabel>
           <Select
-            // defaultValue={selectedOption}
-            onChange={selectHandler}
+            // defaultValue={quizCategories[0]}
+            onChange={(option) => setCategory(option.value)}
             options={quizCategories}
             className={classes.dropdownOption}
             id="select"
-            ref={category}
           />
         </FormGroup>
         <FormGroup>
           <FormLabel> SELECT DIFFICULTY LEVEL:</FormLabel>
           <Select
-            // defaultValue={selectedOption}
-            onChange={difficultyHandler}
+            // defaultValue={quizDifficultyLevel[0]}
+            onChange={(option) => setDifficulty(option.value)}
             options={quizDifficultyLevel}
             className={classes.dropdownOption}
-            ref={difficultyLevel}
             id="difficultyLevel"
           />
         </FormGroup>

@@ -1,27 +1,27 @@
 import { useSignup } from "hooks/useSignup";
 import React, { useState } from "react";
 import { Form, Card, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import CardBg from "../../components/UI/CardBg";
-import classes from "../signup/SignUp.module.css"
-import Button from "../../components/UI/Button"
+import classes from "../signup/SignUp.module.css";
+import Button from "../../components/UI/Button";
 
 export default function SignUp() {
   const [displayName, setDisplayName] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const { signup } = useSignup();
 
   const handleSignUp = (e) => {
     e.preventDefault();
     signup(email, password, displayName);
+
   };
 
   return (
     <CardBg>
-       <Link to="/">
+      <Link to="/">
         <Button className={classes.scoreBoard_homeBtm}>Homepage</Button>
       </Link>
       <Card className={classes.signup_container}>
@@ -56,20 +56,18 @@ export default function SignUp() {
                 required
               />
             </Form.Group>
-            <Button disabled={loading} type="submit" className="w-100">
+            <Button  type="submit" className="w-100">
               Sign Up
             </Button>
           </Form>
           <div
-        className="w-100 text-center mt-2 p-3"
-        style={{ color: "yellow", backgroundColor: "black" }}
-      >
-        Already have an account <Link to="/login">Log in</Link>
-      </div>
+            className="w-100 text-center mt-2 p-3"
+            style={{ color: "yellow", backgroundColor: "black" }}
+          >
+            Already have an account <Link to="/login">Log in</Link>
+          </div>
         </Card.Body>
-
       </Card>
-
     </CardBg>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { collection, doc, updateDoc } from "firebase/firestore";
-import { addDoc, deleteDoc } from "firebase/firestore";
+import { addDoc,} from "firebase/firestore";
 import { db, timestamp } from "../firebase/config"
 
 export default function useFirestore(dataBase) {
@@ -8,10 +8,8 @@ export default function useFirestore(dataBase) {
 
   // collection ref
   const ref = collection(db, dataBase);
-  // const ref = doc(db, dataBase, id)
 
   // add a document
-
   const addDocument = async (doc) => {
     try {
       const createdAt = timestamp.fromDate(new Date());
@@ -21,17 +19,7 @@ export default function useFirestore(dataBase) {
       setError(err.message);
     }
   };
-
-  //delete document
-
-  const deleteDocument = async (id) => {
-    try {
-      await deleteDoc(doc(db, dataBase, id));
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-  // update a document
+  //update a document
   const updateDocument = async (id, updates) => {
     try {
       const updatedDocument = await updateDoc(doc(db, dataBase, id), updates);
@@ -42,5 +30,5 @@ export default function useFirestore(dataBase) {
     }
   };
 
-  return { addDocument, deleteDocument, updateDocument };
+  return { addDocument, updateDocument };
 }

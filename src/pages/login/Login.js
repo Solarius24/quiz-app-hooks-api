@@ -1,22 +1,20 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Card, Alert, Container } from "react-bootstrap";
+import { Link} from "react-router-dom";
+import { Form, Card, Alert } from "react-bootstrap";
 import { useLogin } from "hooks/useLogin";
 import CardBg from "../../components/UI/CardBg";
 import classes from "../login/Login.module.css";
-import Button from "../../components/UI/Button"
+import Button from "../../components/UI/Button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { login } = useLogin();
+  const { login, error } = useLogin();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
-  };
+  }
 
   return (
     <CardBg>
@@ -46,7 +44,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            <Button disabled={loading} type="submit" className="w-100">
+            <Button type="submit" className="w-100">
               Log in
             </Button>
           </Form>

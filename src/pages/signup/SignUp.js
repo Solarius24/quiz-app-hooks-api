@@ -13,9 +13,9 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const { signup } = useSignup();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async(e) => {
     e.preventDefault();
-    signup(email, password, displayName);
+    await signup(email, password, displayName);
 
   };
 

@@ -1,17 +1,11 @@
-import { React,useState } from "react";
+import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./WelcomeScreen.module.css";
 import Button from "components/UI/Button";
 import { ErrorModal } from "components/UI/ErrorModal";
 import { useAuthContext } from "../context/AuthContext";
 import Select from "react-select";
-import {
-  Card,
-  Form,
-  FormGroup,
-  FormLabel,
-  FormControl,
-} from "react-bootstrap";
+import { Card, Form, FormGroup, FormLabel, FormControl } from "react-bootstrap";
 import CardBg from "../components/UI/CardBg";
 import { useLogout } from "hooks/useLogout";
 
@@ -62,14 +56,14 @@ export const WelcomeScreen = ({
   const [difficulty, setDifficulty] = useState();
   const navigate = useNavigate();
 
+  
   //user displyName if false means that user is logout
   const currentUser = useAuthContext();
-  const {logout} = useLogout()
+  const { logout } = useLogout();
 
-
-const logoutHandler = () => {
-  logout()
-}
+  const logoutHandler = () => {
+    logout();
+  };
 
   const errorHandlerScoreBtm = () => {
     if (!currentUser) {
@@ -80,16 +74,23 @@ const logoutHandler = () => {
       return;
     }
   };
+
   const errorHandlerStartBtm = (e) => {
     if (!currentUser && !newUserName) {
       setError({
         title: "USER NAME ERROR",
         message: "PLEASE ENTER PLAYER NAME OR LOG IN",
       });
+    } else if (!category || !difficulty) {
+      setError({
+        title: "OPTIONS ERROR",
+        message: "PLEASE SELECT THE CATEGORY AND DIFFICULTY LEVEL",
+      });
+      return;
     } else {
-      setNewUserNameApp(newUserName)
-      setDifficultyApp(difficulty)
-      setCategoryApp(category)
+      setNewUserNameApp(newUserName);
+      setDifficultyApp(difficulty);
+      setCategoryApp(category);
       navigate("/quiz");
     }
   };

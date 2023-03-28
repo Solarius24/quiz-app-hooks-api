@@ -58,9 +58,9 @@ const App = () => {
         </Route>
         <Route
           path="/login"
-          element={(!currentUser || !newUserName) ? <Login /> : <Navigate to="/" />}
+          element={(currentUser) ? <Navigate to="/"/> : <Login />  }
         />
-        <Route path="/signup" element={!currentUser ? <SignUp /> : <Navigate to="/"/>} />
+        <Route path="/signup" element={currentUser ? <Navigate to="/"/> : <SignUp /> } />
         <Route path="/scoreboard" element={<ScoreBoard />} />
       </Routes>
   );

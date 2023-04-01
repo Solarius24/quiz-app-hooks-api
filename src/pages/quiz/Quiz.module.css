@@ -1,12 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .quiz_container {
-  position: fixed;
-  top: 14vh;
-  left: 25vw;
+  margin-top: 20px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
-  width: 50vw;
-  overflow: hidden;
+  max-width: 700px;
+  height: auto;
 }
 
 .quiz_container_h2,
@@ -42,72 +46,36 @@
   margin: 5px;
   margin-left: 20px;
 }
-.scoreBoard {
-  position: fixed;
-  top: 25vh;
-  left: 25vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 10px solid black;
-  width: 50vw;
-  height: 50vh;
-  background-color: aqua;
-}
-.scoreBoard h2 {
-  padding: 5px;
-  background-color: blue;
-  margin: 0;
-  width: 100%;
-  text-align: center;
-}
-
-.scoreBoardBtm {
-  width: 40vw;
-  margin: 0.3rem;
-}
-
-.scoreBoard_homeBtm {
-  position: fixed;
-  right: 0;
-  top: 0;
-}
-.scoreCard {
-  display: none;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
-  width: 600px;
-  overflow: hidden;
-}
-.scoreCard h1 {
-  padding: 0.2rem;
-  text-align: center;
-  justify-content: center;
-  color: red;
-}
 
 .player_name {
-  position: fixed;
-  bottom: 93vh;
-  left: 25vw;
   color: darkblue;
   font-size: 2rem;
   padding: 10px;
-  width: 50vw;
+  width: auto;
   text-align: center;
   background-color: lightgreen;
   border-radius: 10px;
   border: 3px solid black;
 }
-
-.homePageBtm {
-  position: fixed;
-  bottom: 90vh;
-  left: 86vw;
-}
 .submitBtm {
   width: 100%;
   font-size: 2rem;
+}
+.homePageBtm {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+@media only screen and (max-width: 920px) {
+  .player_name {
+    color: darkblue;
+    font-size: 1rem;
+    padding: 10px;
+    width: auto;
+    text-align: center;
+    background-color: lightgreen;
+    border-radius: 10px;
+    border: 3px solid black;
+  }
 }

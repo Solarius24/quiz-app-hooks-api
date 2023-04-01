@@ -5,14 +5,15 @@ import classes from "./Quiz.module.css";
 import { Loader } from "components/Loader";
 import Button from "components/UI/Button";
 import Card from "components/UI/CardBg";
-import { useAuthContext} from "context/AuthContext";
+import { useAuthContext } from "context/AuthContext";
 import { useGetQuizData } from "hooks/useGetQuizData";
 import { ErrorModal } from "components/UI/ErrorModal";
+import { Container } from "react-bootstrap";
 
 export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
   // to ensure that user select an answer, if not he cannot submit form
-  const [answerChecked, setAnswerChecked] = useState(false); 
+  const [answerChecked, setAnswerChecked] = useState(false);
   const [error, setError] = useState();
   const [value, setValue] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -22,7 +23,7 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
   const dataApi = useGetQuizData(difficulty, category);
 
   //name of user who is log in received from firebase
-  const  currentUser  = useAuthContext();
+  const currentUser = useAuthContext();
 
   const submitQuestionHandler = () => {
     if (questionIndex < 9 && answerChecked === true) {
@@ -48,7 +49,7 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
   if (dataApi === null || dataApi.length === 0) {
     return (
       <Card>
-        < Loader/>
+        <Loader />
       </Card>
     );
   } else if (dataApi.length > 0) {
@@ -61,17 +62,18 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
             onConfirm={() => setError(null)}
           />
         )}
-        <Card>
-          <header>
+        <Container className={classes.container}>
+          <div>
             <Link to="/">
               <Button className={classes.homePageBtm} onClick={() => null}>
-                HomePage
+                Homepage
               </Button>
             </Link>
             <div className={classes.player_name}>
               PLAYER NAME: {currentUser ? currentUser.displayName : newUserName}
             </div>
-          </header>
+          </div>
+
           <div className={classes.quiz_container}>
             <h2 className={classes.quiz_container_h2}>
               {questionIndex + 1}/10
@@ -88,7 +90,8 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
               Submit
             </Button>
           </div>
-        </Card>
+
+        </Container>
       </>
     );
   }

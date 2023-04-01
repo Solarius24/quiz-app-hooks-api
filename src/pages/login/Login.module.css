@@ -1,13 +1,12 @@
-.login_container{
-    margin-top: 20vh;
-    margin-left: 35vw;
-    display:flex;
-    width: 30vw;
-    font-size: 20px;
-    height:fit-content;
+.login_container {
+  margin: auto;
+  display: flex;
+  width: 500px;
+  font-size: 20px;
+  height: fit-content;
 }
 .scoreBoard_homeBtm {
-    position: fixed;
-    right: 0;
-    top: 0;
-  }
+  position: fixed;
+  right: 0;
+  top: 0;
+}

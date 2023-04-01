@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import classes from "../quiz/Quiz.module.css";
-import Card from "components/UI/CardBg";
+import classes from "../scoreCard/ScoreCard.module.css";
 import Button from "components/UI/Button";
 import { useAuthContext} from "context/AuthContext";
 import { ErrorModal } from "components/UI/ErrorModal";
 import useFirestore from "hooks/useFirestore";
+import { Container,Card } from "react-bootstrap";
 
 export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
   const [error, setError] = useState();
@@ -52,7 +52,7 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
   }
 
   return (
-    <Card>
+    <Container>
       {error && (
         <ErrorModal
           title={error.title}
@@ -63,8 +63,9 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
       <Link to="/">
         <Button className={classes.scoreBoard_homeBtm}>Homepage</Button>
       </Link>
-      <div className={classes.scoreBoard}>
-        <h2>YOUR SCORE</h2>
+      
+      <Card className={classes.scoreBoard}>
+        <h2>YOUR SCORE:</h2>
         <h2>{value} %</h2>
         <Link to="/quiz">
           <Button className={classes.scoreBoardBtm}>START NEW QUIZ</Button>
@@ -78,7 +79,8 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
         >
           VIEW SCORE BOARD
         </Button>
-      </div>
-    </Card>
+      </Card>
+
+    </Container>
   );
 };

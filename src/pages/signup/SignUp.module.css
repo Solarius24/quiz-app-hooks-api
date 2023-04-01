@@ -1,7 +1,7 @@
 .signup_container{
-    margin-left: 35vw;
+    margin:auto;
     display:flex;
-    width: 30vw;
+    width: 500px;
     font-size: 20px;
     height: fit-content;
     margin-top: 20vh;

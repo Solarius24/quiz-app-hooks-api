@@ -56,7 +56,6 @@ export const WelcomeScreen = ({
   const [difficulty, setDifficulty] = useState();
   const navigate = useNavigate();
 
-  
   //user displyName if false means that user is logout
   const currentUser = useAuthContext();
   const { logout } = useLogout();
@@ -107,17 +106,14 @@ export const WelcomeScreen = ({
 
       <Card className={classes.btm}>
         <Link to="/login">
-          <Button className={classes.scoreBtm} onClick={logoutHandler}>
+          <Button onClick={logoutHandler}>
             {currentUser ? "LOG OUT" : "LOG IN/SIGN UP"}
           </Button>
         </Link>
         <Link to={currentUser ? "/scoreboard" : ""}>
-          <Button className={classes.scoreBtm} onClick={errorHandlerScoreBtm}>
-            SCORE LIST
-          </Button>
+          <Button onClick={errorHandlerScoreBtm}>SCORE LIST</Button>
         </Link>
       </Card>
-
       <Form className={classes.form_container}>
         <h1 className={classes.quizTitle}>Quiz App</h1>
         {!currentUser && (

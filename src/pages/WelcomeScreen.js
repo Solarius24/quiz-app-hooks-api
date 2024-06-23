@@ -6,7 +6,6 @@ import { ErrorModal } from "components/UI/ErrorModal";
 import { useAuthContext } from "../context/AuthContext";
 import Select from "react-select";
 import { Card, Form, FormGroup, FormLabel, FormControl } from "react-bootstrap";
-import CardBg from "../components/UI/CardBg";
 import { useLogout } from "hooks/useLogout";
 
 //quiz categories
@@ -136,7 +135,7 @@ export const WelcomeScreen = ({
           <FormLabel>SELECT CATEGORY</FormLabel>
           <Select
             // defaultValue={quizCategories[0]}
-            onChange={(option) => setCategory(option.value)}
+            onChange={(option) => setCategory({option:option.value, label:option.label})}
             options={quizCategories}
             className={classes.dropdownOption}
             id="select"

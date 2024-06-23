@@ -5,14 +5,14 @@ export function useGetQuizData(difficulty, category) {
   const [dataApi, setDataApi] = useState(null);
   useEffect(() => {
     const linksFactory = () => {
-      if (category === "any" && difficulty === "any") {
+      if (category.option === "any" && difficulty === "any") {
         return `https://opentdb.com/api.php?amount=10`;
-      } else if (category === "any" && difficulty !== "any") {
+      } else if (category.option === "any" && difficulty !== "any") {
         return `https://opentdb.com/api.php?amount=10&difficulty=${difficulty}&type=multiple`;
-      } else if (category !== "any" && difficulty === "any") {
-        return `https://opentdb.com/api.php?amount=10&category=${category}&type=multiple`;
+      } else if (category.option !== "any" && difficulty === "any") {
+        return `https://opentdb.com/api.php?amount=10&category=${category.option}&type=multiple`;
       } else {
-        return `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`;
+        return `https://opentdb.com/api.php?amount=10&category=${category.option}&difficulty=${difficulty}&type=multiple`;
       }
     };
     const dataFetch = async () => {

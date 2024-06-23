@@ -4,11 +4,11 @@ import { NewQuestion } from "components/NewQuestion";
 import classes from "./Quiz.module.css";
 import { Loader } from "components/Loader";
 import Button from "components/UI/Button";
-import Card from "components/UI/CardBg";
+import CardLoader from "components/UI/CardBg";
 import { useAuthContext } from "context/AuthContext";
 import { useGetQuizData } from "hooks/useGetQuizData";
 import { ErrorModal } from "components/UI/ErrorModal";
-import { Container } from "react-bootstrap";
+import { Container,Card } from "react-bootstrap";
 
 export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -48,9 +48,9 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
 
   if (dataApi === null || dataApi.length === 0) {
     return (
-      <Card>
+      <CardLoader>
         <Loader />
-      </Card>
+      </CardLoader>
     );
   } else if (dataApi.length > 0) {
     return (
@@ -78,11 +78,14 @@ export const Quiz = ({ setScoreValue, category, difficulty, newUserName }) => {
             <h2 className={classes.quiz_container_h2}>
               {questionIndex + 1}/10
             </h2>
+ 
             <NewQuestion
               dataApi={dataApi[questionIndex]}
               setUserAnswer={setUserAnswer}
               setAnswerChecked={setAnswerChecked}
             />
+
+      
             <Button
               className={classes.submitBtm}
               onClick={submitQuestionHandler}

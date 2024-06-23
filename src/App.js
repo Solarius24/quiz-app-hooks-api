@@ -14,7 +14,7 @@ const App = () => {
   const [difficulty, setDifficulty] = useState("any");
   const [newUserName, setNewUserName] = useState();
   const currentUser = useAuthContext();
-  console.log("App", currentUser)
+
 
   return (
       <Routes>

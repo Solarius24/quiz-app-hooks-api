@@ -38,9 +38,10 @@ export const ScoreCard = ({ value, category, difficulty, scoreValue }) => {
   function addToScoreBoard() {
     if (currentUser) {
       const score = {
+        date: new Date().toLocaleString(),
         playerName: currentUser.displayName,
         score:scoreValue,
-        category:category,
+        category:category.label,
         difficultyLevel:difficulty,
       }
 

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import classes from "../pages/quiz/Quiz.module.css";
-import { ErrorModal } from "./UI/ErrorModal";
+import { Card, CardBody, CardTitle } from "react-bootstrap";
+import CardHeader from "react-bootstrap/esm/CardHeader";
 
-export const NewQuestion = ({ dataApi, display, setUserAnswer,setAnswerChecked }) => {
-  
+export const NewQuestion = ({
+  dataApi,
+  display,
+  setUserAnswer,
+  setAnswerChecked,
+}) => {
   const { incorrect_answers } = dataApi;
   const { correct_answer } = dataApi;
   const { question } = dataApi;
@@ -17,15 +22,13 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer,setAnswerChecked }
     }
   }, [correct_answer, incorrect_answers]);
 
-
   const onChangeHandler = (e) => {
     if (e.target.checked) {
       const value = e.target.value;
       setUserAnswer(value);
-      setAnswerChecked(true)
+      setAnswerChecked(true);
       return setUserAnswer;
     }
-    
   };
   const renderAnswers = allAnswers.map((answer) => {
     return (
@@ -44,11 +47,16 @@ export const NewQuestion = ({ dataApi, display, setUserAnswer,setAnswerChecked }
 
   return (
     <>
-
-    <div style={display}>
+      {/* <div style={display}>
       <h1 className={classes.question_h1}>{question}</h1>
       <ul className={classes.question}>{renderAnswers}</ul>
-    </div>
+    </div> */}
+      <Card style={{width:"50rem"}}>
+        <CardHeader>
+        <CardTitle>{question}</CardTitle>
+        </CardHeader>
+        <CardBody className={classes.question}>{renderAnswers}</CardBody>
+      </Card>
     </>
-  )
+  );
 };

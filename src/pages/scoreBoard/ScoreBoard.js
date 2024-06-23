@@ -1,120 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
 import { Link } from "react-router-dom";
 import classes from "./ScoreBoard.module.css";
 import Button from "components/UI/Button";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/config";
 import { useCollection } from "hooks/useCollection";
-import { Container } from "react-bootstrap";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+
 
 export const ScoreBoard = () => {
-  const [data, setData] = useState();
-  const [order, setOrder] = useState("ASC");
   const { documents } = useCollection("score");
 
-  // const ScoreListData = collection(db, "score");
-
-  // useEffect(() => {
-  //   async function getScoreData() {
-  //     const Snapshot = await getDocs(ScoreListData);
-  //     const score = Snapshot.docs.map((doc) => doc.data());
-  //     setData(score);
-  //   }
-  //   getScoreData();
-  // }, []);
-
-  // if (data === undefined) {
-  //   return;
-  // } else {
-  //   const sorting = (col) => {
-  //     if (order === "ASC") {
-  //       const sorted = [...data].sort((a, b) =>
-  //         a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
-  //       );
-  //       setData(sorted);
-  //       setOrder("DSC");
-  //     }
-  //     if (order === "DSC") {
-  //       const sorted = [...data].sort((a, b) =>
-  //         a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
-  //       );
-  //       setData(sorted);
-  //       setOrder("ASC");
-  //     }
-  //   };
-
-  // const sortingScore = (col) => {
-  //   if (order === "ASC") {
-  //     const sorted = [...data].sort((a, b) => (a[col] > b[col] ? 1 : -1));
-  //     setData(sorted);
-  //     setOrder("DSC");
-  //   }
-  //   if (order === "DSC") {
-  //     const sorted = [...data].sort((a, b) => (a[col] < b[col] ? 1 : -1));
-  //     setData(sorted);
-  //     setOrder("ASC");
-  //   }
-  // };
-
   return (
-    <Container className={classes.scoreBoard_container}>
+    <>
       <Link to="/">
         <Button className={classes.scoreBoardBtm}>HOMEPAGE</Button>
       </Link>
-      <table className={classes.container}>
-        <thead>
-          <tr className={classes.header_container}>
-            <th
-            // onClick={() => {
-            //   sorting("date");
-            // }}
-            >
-              Data
-            </th>
-            <th
-            // onClick={() => {
-            //   sorting("playerName");
-            // }}
-            >
-              Player Name
-            </th>
-            <th
-            // onClick={() => {
-            //   sortingScore("score");
-            // }}
-            >
-              Score
-            </th>
-            <th
-            // onClick={() => {
-            //   sorting("category");
-            // }}
-            >
-              Category
-            </th>
-            <th
-            // onClick={() => {
-            //   sorting("difficultyLevel");
-            // }}
-            >
-              Difficulty Level
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {documents &&
-            documents.map((player) => (
-              <tr key={player.id} className={classes.score_container}>
-                <td>{player.createdAt.toDate().toDateString()}</td>
-                <td>{player.playerName}</td>
-                <td>{player.score}</td>
-                <td>{player.category}</td>
-                <td>{player.difficultyLevel}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </Container>
+      <DataTable value={documents} className={classes.scoreTable}>
+        <Column className={classes.scoreBoardColumn} field="date" header="DATE" sortable />
+        <Column className={classes.scoreBoardColumn} field="playerName" header="PLAYER NAME" sortable />
+        <Column className={classes.scoreBoardColumn} field="score" header="SCORE" sortable />
+        <Column className={classes.scoreBoardColumn} field="category" header="CATEGORY" sortable />
+        <Column className={classes.scoreBoardColumn} field="difficultyLevel" header="DIFFICULTY LEVEL" sortable />
+      </DataTable>
+    </>
   );
-  // }
 };
+// };
